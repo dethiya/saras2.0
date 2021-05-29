@@ -133,7 +133,9 @@
                                     <td><?=$value->chassis_prefix?></td>
                                     <td><?=$value->chassis_no?></td>
                                     <td><?=$value->engine_no?></td>
-                                    <td><?=date('d-m-Y',strtotime($value->invoice_dt))?></td>
+                                    <td data-order="<?=$value->invoice_dt?>">
+                                    <?=date('d-M-y',strtotime($value->invoice_dt))?>
+                                    </td>
                                     <td>
                                     <?php
                                         $MSIL_dispatch_date = new DateTime(date('d-m-Y',strtotime($value->invoice_dt)));
@@ -160,7 +162,7 @@
                                     <td><?php echo $value->srm_id>0 ? $get_srm->srm_name : '-'; ?>
                                     <td><?php echo $value->rm_id>0 ? $get_rm->rm_name : '-'; ?>
                                     </td>
-                                    <td><?php echo !empty($value->customer_name) ? date('d-m-Y',strtotime($value->allotment_dt)) : '-'; ?></td>
+                                    <td><?php echo !empty($value->customer_name) ? date('d-M-y',strtotime($value->allotment_dt)) : '-'; ?></td>
                                     <td><?php
                                         if (!empty($value->customer_name)){
                                         $Alt_dt=new DateTime($value->allotment_dt);
@@ -173,9 +175,9 @@
                                     </td>
                                     <td><?php echo empty($value->allotment_remark)?'-':$value->allotment_remark;?></td>
                                     <td><?php echo empty($value->sms_inv_no)?'-':$value->sms_inv_no;?></td>
-                                    <td><?php echo empty($value->sms_inv_no) ? '-' : date('d-m-Y',strtotime($value->sms_inv_dt)); ?></td>
+                                    <td><?php echo empty($value->sms_inv_no) ? '-' : date('d-M-y',strtotime($value->sms_inv_dt)); ?></td>
                                     <td><?php echo empty($value->dms_inv_no)?'-':$value->dms_inv_no;?></td>
-                                    <td><?php echo empty($value->dms_inv_no) ? '-' : date('d-m-Y',strtotime($value->dms_inv_dt)); ?></td>
+                                    <td><?php echo empty($value->dms_inv_no) ? '-' : date('d-M-y',strtotime($value->dms_inv_dt)); ?></td>
                                     <td><?php echo empty($value->mga_amount) ? '-' : $value->mga_amount; ?></td>
                                 </tr>
                                 <?php endforeach;?>

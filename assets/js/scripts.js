@@ -1,6 +1,6 @@
 
-
 $(document).ready(function(){
+    
     $('#is_finance').on('change', function () {
         if(this.value === "Yes"){
             $(".display_div").show();

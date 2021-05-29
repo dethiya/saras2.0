@@ -4,6 +4,7 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>-->
         <script src="assets/js/app.min.js"></script>
         <script src="assets/js/theme/apple.min.js"></script>
+
         <script src="assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
         <script src="assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
