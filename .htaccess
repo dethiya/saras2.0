@@ -1,0 +1,3 @@
+#ErrorDocument 404 /404.php
+ErrorDocument 404 /seva/404.php
+#ErrorDocument 404 /new_saras/404.php
