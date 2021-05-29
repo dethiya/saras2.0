@@ -59,7 +59,7 @@
 
                     <div class="panel-body">
 
-                        <table id="data-table-combine" class="table table-striped table-bordered table-td-valign-middle">
+                        <table id="data-table-combine" class="table table-striped table-bordered table-td-valign-middle"">
                             <thead>
                             <tr>
                                 <th width="1%">SN</th>

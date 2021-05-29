@@ -107,7 +107,9 @@
                                         echo $vintage = $current_date->diff($MSIL_dispatch_date)->format("%a");
                                         ?>
                                     </td>
-                                    <td><?=$value->type==1?'Type II':'Type I' ?></td>
+                                    <td>
+                                        <?=$value->type==1?'Type II':'Type I' ?>
+                                    </td>
                                     <td><a href="javascript:void(0)"><?php $get_stock_location=StockLocation::find($value->stock_location); echo $get_stock_location->stock_loc_name; ?></a></td>
                                     <td><?php echo empty($value->customer_name) ? '-' : $value->customer_name;?></td>
                                     <td><?php echo $value->srm_id>0 ? $get_srm->srm_name : '-'; ?>

@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <table id="data-table-combine" class="table table-striped table-bordered table-td-valign-middle">
+                        <table id="data-table-combine" class="table table-striped table-bordered table-td-valign-middle" data-order="[[ 2, &quot;asc&quot; ],[ 4, &quot;asc&quot; ]]">
                             <thead>
                             <tr>
                                 <th width="1%">SN</th>
@@ -97,7 +97,7 @@
                                     <td><?=$value->chassis_prefix?></td>
                                     <td><?=$value->chassis_no?></td>
                                     <td><?=$value->engine_no?></td>
-                                    <td data-order="<?=$value->invoice_dt?>">
+                                    <td>
                                         <?=date('d-M-y',strtotime($value->invoice_dt))?>
                                     </td>
                                     <td>
