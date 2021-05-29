@@ -12,6 +12,18 @@
     }else{
         $allotment=Stock::select('*','delr="'.$session_user->outlet_id.'" AND allot_status_id<>5','allot_status_id ASC, model_code ASC, color ASC, invoice_dt DESC');
     }
+
+    if (isset($_GET['type']) && $_GET['type']!=''){
+        $type=$_GET['type'];
+        $id=$_GET['id'];
+        $update_type=Stock::find($_GET['id']);
+        $update_type->type=$type;
+        $update_type->save();
+        redirect('allotment.php');
+        $session->message='Vehicle type updated successfully.';
+    }
+
+
     ?>
     <div id="content" class="content">
         <ol class="breadcrumb float-xl-right">
@@ -129,9 +141,13 @@
                                         echo $vintage = $current_date->diff($MSIL_dispatch_date)->format("%a");
                                         ?>
                                     </td>
-                                    <td><?php $check_date=strtotime('16-04-2021');
-                                        echo date('d-m-Y',strtotime($value->invoice_dt))<$check_date ? 'Type I' : 'Type II';
-                                    ?></td>
+                                    <td>
+                                    <?php if ($value->type==1): ?>
+                                        <a href="?type=0&id=<?=$value->id?>">Type II</a>
+                                    <?php else:?>
+                                        <a href="?type=1&id=<?=$value->id?>">Type I</a>
+                                    <?php endif;?>
+                                    </td>
                                     <td><a href="update-location.php?id=<?=$value->id?>"><?php $get_stock_location=StockLocation::find($value->stock_location); echo $get_stock_location->stock_loc_name; ?></a></td>
                                     <td><?php
                                         if($value->veh_status=='ok'){

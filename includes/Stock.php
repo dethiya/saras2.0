@@ -56,6 +56,7 @@ class Stock extends Db_object
         'exch_remark',
         'delivery_date',
         'delivery_datetime',
+        'type'
     );
     public $id;
     public $delr;
@@ -109,6 +110,7 @@ class Stock extends Db_object
     public $exch_remark;
     public $delivery_date;
     public $delivery_datetime;
+    public $type;
 
 
 
