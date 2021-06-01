@@ -10,6 +10,7 @@ if (empty($_GET['id'])){
     redirect('allotment.php');
 }
 
+
 $allotment=Stock::find($_GET['id']);
 $get_vehicle_id=$_GET['id'];
 $variant=Variant::find_variant($allotment->model_code);
@@ -18,12 +19,11 @@ $get_fin_stage=FinStage::find($allotment->fin_stage);
 $get_stock_loc=StockLocation::find($allotment->stock_location);
 $get_exch_status=ExchangeStatus::find($allotment->exch_status);
 $get_color=Color::find_color($allotment->color);
-if($allotment->fin_is_fin_req=='Yes'){
-    $disp='';
-    $cash='cash';
-}else{
-    $disp='display_div';
-    $cash='';
+
+if ($allotment->fin_is_fin_req=='Yes') {
+        $disabled='';
+} else {
+    $disabled='disabled';
 }
 
 
@@ -32,22 +32,32 @@ if (isset($_POST['submit']))
 {
     date_default_timezone_set('Asia/Kolkata');
     $allotment->fin_is_fin_req=$_POST['fin_is_fin_req'];
+    $allotment->mssf_id=$_POST['mssf_id'];
+    $allotment->mssf_login_dt=$_POST['mssf_login_dt'];
     $allotment->fin_is_fin_req=='No'?$allotment->fin_fin_type="Nil":$allotment->fin_fin_type=$_POST['fin_fin_type'];
     $allotment->fin_bank_id=$_POST['fin_bank_id'];
+    $allotment->branch=$_POST['branch'];
+    $allotment->bank_executive=$_POST['bank_executive'];
     $allotment->fin_stage=$_POST['fin_stage'];
     $allotment->fin_stage_dt=date('Y-m-d');
     $allotment->remark_one=$_POST['remark_one'];
+    $allotment->customer_mobile_no=$_POST['customer_mobile_no'];
     $allotment->save();
 
     $history->vehicle_id        = $get_vehicle_id;
     $history->allotment_dt      = $allotment->allotment_dt;
     $history->customer_name     = $allotment->customer_name;
     $history->fin_is_fin_req    = $allotment->fin_is_fin_req;
+    $history->mssf_id           = $allotment->mssf_id;
+    $history->mss_login_id      = $allotment->mss_login_id;
     $history->fin_fin_type      = $allotment->fin_fin_type;
     $history->fin_bank_id       = $allotment->fin_bank_id;
+    $history->branch            = $allotment->branch;
+    $history->bank_executive    = $allotment->bank_executive;
     $history->fin_stage         = $allotment->fin_stage;
     $history->fin_stage_dt      = $allotment->fin_stage_dt;
     $history->remark_one        = $allotment->remark_one;
+    $history->customer_mobile_no    = $allotment->customer_mobile_no;
     $history->updated_by        = $session->user_id;
 
 
@@ -164,12 +174,32 @@ if (isset($_POST['submit']))
                                         </select>
                                     </div>
                                 </div>
+<!-- MSSF ID -->
+                                <div class="form-group row m-b-15 ">
+                                    <label class="col-md-4 col-sm-4 col-form-label" for="mssf_id">
+                                        MSSF ID :
+                                    </label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <input class="form-control" type="text" value="<?=$allotment->mssf_id?>" id="mssf_id" name="mssf_id" placeholder="Enter MSSF ID" <?=$disabled?> />
+                                        
+                                    </div>
+                                </div>
+<!-- MSSF Login Date -->
+                                <div class="form-group row m-b-15 ">
+                                    <label class="col-md-4 col-sm-4 col-form-label" for="mssf_login_dt">
+                                        MSSF Login Date :
+                                    </label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <input class="form-control" type="date" value="<?=$allotment->mssf_login_dt?>" id="mssf_login_dt" name="mssf_login_dt" placeholder="Enter Remarks" <?=$disabled?> />
+                                    </div>
+                                </div>
 
-                                <div class="form-group row m-b-15">
-                                    <label class="col-md-4 col-sm-4 col-form-label <?=$disp?>" for="fin_fin_type">Finance Type * :</label>
-                                    <div class="col-md-4 col-sm-4 <?=$disp?>">
-                                        <select name="fin_fin_type" id="finance_type" class="form-control">
-                                            <option value="">-Select Finance-</option>
+
+                                <div class="form-group row m-b-15 ">
+                                    <label class="col-md-4 col-sm-4 col-form-label" for="fin_fin_type">Finance Type :</label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <select name="fin_fin_type" id="finance_type" class="form-control" <?=$disabled?>>
+                                            <option value="">-Select Finance Type-</option>
                                             <?php
                                             $fin_type=array('Self Finance', 'SAPL Finance','Bank Staff');
                                             foreach ($fin_type as $list) {
@@ -186,9 +216,9 @@ if (isset($_POST['submit']))
                                 </div>
 
                                 <div class="form-group row m-b-15">
-                                    <label class="col-md-4 col-sm-4 <?=$disp?> col-form-label " for="fin_bank_id">Bank * :</label>
-                                    <div class="col-md-4 col-sm-4 <?=$disp?>">
-                                        <select name="fin_bank_id" id="" class="form-control" >
+                                    <label class="col-md-4 col-sm-4 col-form-label " for="fin_bank_id">Bank :</label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <select name="fin_bank_id" id="fin_bank_id" class="form-control" <?=$disabled?> >
                                             <option value="">-Select Bank-</option>
                                             <?php
                                             $banks=Bank::all();
@@ -198,20 +228,48 @@ if (isset($_POST['submit']))
                                                 }else{
                                                     echo "</option> <option value='".$list->id."'>";
                                                 }
-                                                echo $list->bank_name.' ('.$list->bank_branch.')</option>';
+                                                echo $list->bank_name.'</option>';
                                             }
                                             ?>
                                         </select>
                                     </div>
                                 </div>
-
+<!-- Branch -->
+                                <div class="form-group row m-b-15  ">
+                                    <label class="col-md-4 col-sm-4 col-form-label" for="branch">
+                                        Bank Branch :
+                                    </label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <input class="form-control" type="text" value="<?=$allotment->branch?>" id="branch" name="branch" placeholder="Enter Branch" <?=$disabled?> />
+                                    </div>
+                                </div>
+<!-- Bank Executive -->
                                 <div class="form-group row m-b-15 ">
+                                    <label class="col-md-4 col-sm-4 col-form-label" for="bank_executive">
+                                        Bank Executive :
+                                    </label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <input class="form-control" type="text" value="<?=$allotment->bank_executive?>" id="bank_executive" name="bank_executive" placeholder="Enter Bank Executive Name" <?=$disabled?> />
+                                    </div>
+                                </div>
+                                <div class="form-group row m-b-15   ">
                                     <label class="col-md-4 col-sm-4 col-form-label" for="fin_stage">
                                         Stage * :
                                     </label>
                                     <div class="col-md-4 col-sm-4">
-                                        <select name="fin_stage" id="stages" class="form-control" >
-                                        
+                                    <select name="fin_stage" id="stages" class="form-control" >
+                                    <option value="">-Select Finance Stage-</option>
+                                            <?php
+                                            $stages=FinStage::all();
+                                            foreach ($stages as $list) {
+                                                if ($allotment->fin_stage==$list->id){
+                                                    echo "<option selected value='".$list->id."'>";
+                                                }else{
+                                                    echo "</option> <option value='".$list->id."'>";
+                                                }
+                                                echo $list->stage_name.'</option>';
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -233,6 +291,15 @@ if (isset($_POST['submit']))
                                     </label>
                                     <div class="col-md-4 col-sm-4">
                                         <input class="form-control" type="text" value="<?=$allotment->remark_one?>" id="remark_one" name="remark_one" placeholder="Enter Remarks"  />
+                                    </div>
+                                </div>
+                                <!-- Customer Mobile Number -->
+                                <div class="form-group row m-b-15 ">
+                                    <label class="col-md-4 col-sm-4 col-form-label" for="customer_mobile_no">
+                                        Customer Mobile Number :
+                                    </label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <input class="form-control" type="number" value="<?=$allotment->customer_mobile_no?>" id="customer_mobile_no" name="customer_mobile_no" placeholder="Enter Customer Mobile Number"  />
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-0">

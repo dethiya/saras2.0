@@ -1,30 +1,25 @@
 
 $(document).ready(function(){
     
+
     $('#is_finance').on('change', function () {
-        if(this.value === "Yes"){
-            $(".display_div").show();
-            $(".cash").hide();
-        } else {
-            $(".display_div").hide();
-            $(".cash").show();
+        $('#mssf_id').prop('disabled', true);
+        $('#mssf_login_dt').prop('disabled', true);
+        $('#finance_type').prop('disabled', true);
+        $('#fin_bank_id').prop('disabled', true);
+        $('#branch').prop('disabled', true);
+        $('#bank_executive').prop('disabled', true);
+        if ($(this).val() == 'Yes') {
+          $('#mssf_id').prop('disabled', false);
+          $('#mssf_login_dt').prop('disabled', false);
+          $('#finance_type').prop('disabled', false);
+          $('#fin_bank_id').prop('disabled', false);
+          $('#branch').prop('disabled', false);
+          $('#bank_executive').prop('disabled', false);
         }
-
-        var finance_value=$("#is_finance").val();
-        // console.log(finance_value);
-        $.ajax({
-            url:'ajax/loadstages.php',
-            method:'post',
-            data: 'finance_value='+finance_value
-        }).done(function (stages) {
-            // console.log(stages);
-            stages=JSON.parse(stages);
-            stages.forEach(function(stage){
-                $('#stages').append('<option value='+stage.id+'>'+stage.stage_name+'</option>')
-            })
-        })
-
+        
     });
+
 
     $('#is_exchange').on('change', function () {
         if(this.value === "Yes"){

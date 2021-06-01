@@ -65,6 +65,9 @@ $delivery_menu_class='active';
                                 <th class="text-nowrap">SMS Inv Dt</th>
                                 <th class="text-nowrap">DMS No</th>
                                 <th class="text-nowrap">DMS Inv Dt</th>
+                                <th class="text-nowrap">Customer Mobile #</th>
+                                <th class="text-nowrap">Customer Email Id</th>
+                                <th class="text-nowrap">Address</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -93,9 +96,9 @@ $delivery_menu_class='active';
                                             ?>
 
 
-                                            <a href="gate-pass.php?id=<?=$value->id?>" class="btn btn-danger btn-sm">
+                                            <!-- <a href="gate-pass.php?id=<?=$value->id?>" class="btn btn-danger btn-sm">
                                                 <i class="fa fa-sticky-note"></i>
-                                            </a>
+                                            </a> -->
                                         </div>
                                     </td>
                                     <td><?=!$get_customer_details?'-':$get_customer_details->gatepass?></td>
@@ -115,6 +118,20 @@ $delivery_menu_class='active';
                                     <td><?php echo empty($value->sms_inv_no) ? '-' : date('d-m-Y',strtotime($value->sms_inv_dt)); ?></td>
                                     <td><?php echo empty($value->dms_inv_no)?'-':$value->dms_inv_no;?></td>
                                     <td><?php echo empty($value->dms_inv_no) ? '-' : date('d-m-Y',strtotime($value->dms_inv_dt)); ?></td>
+                                    <td>
+                                    <?php echo !$get_customer_details?'-':$get_customer_details->mobile_no; ?>
+                                    </td>
+                                    <td>
+                                    <?php  if(!$get_customer_details){
+                                        echo '-';
+                                    }else{
+                                        echo '<a href="mailto:'.$get_customer_details->email_id.'">'.$get_customer_details->email_id.'</a>';
+                                    }
+                                     ?>
+                                    </td>
+                                    <td>
+                                    <?php echo !$get_customer_details?'-':$get_customer_details->address; ?>
+                                    </td>
                                 </tr>
                                 <?php endforeach;?>
                             </tbody>

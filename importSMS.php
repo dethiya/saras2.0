@@ -35,7 +35,7 @@ if(isset($_POST['importSubmit'])){
 
                 if($prevResult->num_rows > 0){
                     // Update member data in the database
-                    $database->query("UPDATE dispatches SET sms_inv_no='".$sms_inv_no."', sms_inv_dt='".$sms_inv_dt."' WHERE chassis_no = '".$chassis_no."' AND engine_no = '".$engine_no."'");
+                    $database->query("UPDATE dispatches SET allot_status_id=1, sms_inv_no='".$sms_inv_no."', sms_inv_dt='".$sms_inv_dt."' WHERE chassis_no = '".$chassis_no."' AND engine_no = '".$engine_no."'");
                 }else{
                     // Insert member data in the database
                     $qstring='?status=err';

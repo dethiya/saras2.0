@@ -51,7 +51,7 @@
                                 <th width="1%">SN</th>
                                 <th>Status</th>
                                 <th width="1%">Actions</th>
-                                <th width="1%">Delr Code</th>
+                                
                                 <th class="text-nowrap">Allot Date</th>
                                 <th width="1%">Allot Days</th>
                                 <th class="text-nowrap">Variant Name</th>
@@ -59,12 +59,18 @@
                                 <th class="text-nowrap">Chassis #</th>
                                 <th class="text-nowrap">Engine #</th>
                                 <th class="text-nowrap">Customer Name</th>
+                                <th width="1%">Mobile No.</th>
                                 <th class="text-nowrap">Fin. Required</th>
+                                <th class="text-nowrap">Finance Type</th>
+                                <th class="text-nowrap">MSSF ID/Login Dt</th>
+
                                 <th class="text-nowrap">SRM</th>
                                 <th class="text-nowrap">RM</th>
-                                <th class="text-nowrap">Finance Type</th>
+                               
                                 <th class="text-nowrap">Financer</th>
                                 <th class="text-nowrap">Branch</th>
+                                <th class="text-nowrap">Bank Executive</th>
+                                
                                 <th class="text-nowrap">Fin. Stage</th>
                                 <th class="text-nowrap">Last updated on</th>
                                 <th class="text-nowrap">Fin. Remarks</th>
@@ -103,8 +109,8 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
-                                    <td><?=$value->delr?></td>
-                                    <td><?php echo !empty($value->customer_name) ? date('d-m-Y',strtotime($value->allotment_dt)) : '-'; ?></td>
+                                   
+                                    <td><?php echo !empty($value->customer_name) ? date('d-M-y',strtotime($value->allotment_dt)) : '-'; ?></td>
                                     <td><?php
                                         if (!empty($value->customer_name)){
                                             $current_date = new DateTime();
@@ -122,12 +128,20 @@
                                     <td><?=$value->chassis_no?></td>
                                     <td><?=$value->engine_no?></td>
                                     <td><?php echo empty($value->customer_name) ? '-' : $value->customer_name;?></td>
+                                    <td><?=empty($value->customer_name) ? '-' : $value->customer_mobile_no;?></td>
                                     <td><?php echo empty($value->fin_is_fin_req) ? '-' : $value->fin_is_fin_req;?></td>
+                                    <td><?php echo empty($value->fin_fin_type) ? '-' : $value->fin_fin_type;?></td>
+                                    <td><?php 
+                                            echo $value->fin_is_fin_req=='No' ? '-' : $value->mssf_id;
+                                            echo empty($value->mssf_id) ? '-' : ' / '.date('d-M-y',strtotime($value->mssf_login_dt));
+                                        ?>
+                                    </td>
                                     <td><?php echo $value->srm_id>0 ? $get_srm->srm_name : '-'; ?></td>
                                     <td><?php echo $value->rm_id>0 ? $get_rm->rm_name : '-'; ?></td>
-                                    <td><?php echo empty($value->fin_fin_type) ? '-' : $value->fin_fin_type;?></td>
+                                    
                                     <td><?php echo $value->fin_bank_id>0 ? $get_financer->bank_name :  '-';?></td>
-                                    <td><?php echo $value->fin_bank_id>0 ? $get_financer->bank_branch :  '-';?></td>
+                                    <td><?php echo $value->fin_bank_id>0 ? $value->branch :  '-';?></td>
+                                    <td><?php echo $value->fin_bank_id>0 ? $value->bank_executive :  '-';?></td>
                                     <td><?php echo $value->fin_stage>0 ? $get_fin_stage->stage_name :  '-';?></td>
                                     <td><?php echo empty($value->fin_is_fin_req) ? '-' : $value->fin_stage_dt;?></td>
                                     <td><?php echo empty($value->remark_one) ? '-' : $value->remark_one;?></td>

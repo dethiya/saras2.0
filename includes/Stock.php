@@ -49,7 +49,11 @@ class Stock extends Db_object
         'fin_stage',
         'fin_stage_dt',
         'remark_one',
-        'remark_two',
+        'branch',
+        'mssf_id',
+        'mssf_login_dt',
+        'bank_executive',
+        'customer_mobile_no',
         'is_exchange',
         'exch_status',
         'exch_date',
@@ -103,7 +107,11 @@ class Stock extends Db_object
     public $fin_stage;
     public $fin_stage_dt;
     public $remark_one;
-    public $remark_two;
+    public $branch;
+    public $mssf_id;
+    public $mssf_login_dt;
+    public $bank_executive;
+    public $customer_mobile_no;
     public $is_exchange;
     public $exch_status;
     public $exch_date;
@@ -111,7 +119,4 @@ class Stock extends Db_object
     public $delivery_date;
     public $delivery_datetime;
     public $type;
-
-
-
 }

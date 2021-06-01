@@ -12,7 +12,7 @@ if(!empty($_GET['status'])){
         case 'succ':
             $type='Success';
             $statusType = 'alert-success';
-            $statusMsg = 'Members data has been imported successfully.';
+            $statusMsg = 'DMS Invoice and Invoice Date mapped successfully.';
             break;
         case 'err':
             $type='Error';

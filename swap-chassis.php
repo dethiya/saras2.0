@@ -116,13 +116,16 @@ if(isset($_POST['swap'])){
                                         <option value="">-Select Old Chassis-</option>
                                         <?php
                                         $getChassis=Stock::select('*','allot_status_id<>5 or allot_status_id<>6 and delr="{$session_user->outlet_id}"','customer_name, chassis_no asc');
+                                        $getVariant=Variant::select('*','variant_code="'.$value->model_code.'"');
+                                        echo '<pre>';
+                                        print_r($getVariant);
                                         foreach ($getChassis as $value){
                                             if(empty($value->customer_name)){
                                                 $customer='';
                                             }else{
                                                 $customer=$value->customer_name;
                                             }
-                                            echo '<option value="'.$value->id.'">'.$value->chassis_no.' '.$customer.'</option>';
+                                            echo '<option value="'.$value->id.'">'.$getVariant->variant_name.$value->chassis_no.' '.$customer.'</option>';
                                         }
                                         ?>
                                     </select>

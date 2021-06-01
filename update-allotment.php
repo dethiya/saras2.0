@@ -25,7 +25,7 @@ if (isset($_POST['submit']))
 {
     date_default_timezone_set('Asia/Kolkata');
     $allotment->allot_status_id=$_POST['allot_status_id'];
-    $allotment->allotment_dt=date('Y-m-d');
+    $allotment->allotment_dt=$_POST['allotment_dt'];
     $allotment->customer_name=ucwords(strtolower($_POST['customer_name']));
     $allotment->srm_id=$_POST['srm_id'];
     $allotment->rm_id=$_POST['rm_id'];
@@ -165,21 +165,22 @@ if (isset($_POST['submit']))
                                         </select>
                                     </div>
                                 </div>
-                                <?php if($allotment->allot_status_id==4):?>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-md-4 col-sm-4 col-form-label" for="allotment_dt">Date * :</label>
-                                    <div class="col-md-4 col-sm-4">
-                                        <input class="form-control " type="date" value="<?=date('Y-m-d');?>" id="allotment_dt" name="" placeholder="Required" data-parsley-required="true" disabled/>
-                                    </div>
-                                </div>
-                                <?php else:?>
+                                
+                                    
                                     <div class="form-group row m-b-15">
-                                        <label class="col-md-4 col-sm-4 col-form-label" for="allotment_dt">Date * :</label>
+                                        <label class="col-md-4 col-sm-4 col-form-label" for="allotment_dt">Allotment Date * :</label>
                                         <div class="col-md-4 col-sm-4">
-                                            <input class="form-control " type="date" value="<?=$allotment->allotment_dt?>" id="allotment_dt" name="allotment_dt" placeholder="Required" data-parsley-required="true" readonly />
+                                        <?php
+                                        if($allotment->allot_status_id==4){
+                                            echo '<input class="form-control " type="date" value="'.date('Y-m-d').'" id="allotment_dt" name="allotment_dt" placeholder="Required" data-parsley-required="true" readonly />';
+                                        }else{
+                                            echo '<input class="form-control " type="date" value="'.$allotment->allotment_dt.'" id="allotment_dt" name="allotment_dt" placeholder="Required" data-parsley-required="true" readonly />';
+                                        }
+                                    ?>
+                                    
+                                            
                                         </div>
                                     </div>
-                                <?php endif;?>
                                 <div class="form-group row m-b-15">
                                     <label class="col-md-4 col-sm-4 col-form-label" for="customer_name">Customer Name * :</label>
                                     <div class="col-md-4 col-sm-4">
@@ -240,7 +241,7 @@ if (isset($_POST['submit']))
                                 <div class="form-group row m-b-15">
                                     <label class="col-md-4 col-sm-4 col-form-label" for="mga_amount">MGA Amount :</label>
                                     <div class="col-md-4 col-sm-4">
-                                        <input class="form-control" type="text" value="<?=$allotment->mga_amount?>" id="mga_amount" name="mga_amount" placeholder="Enter Remarks"  />
+                                        <input class="form-control" type="text" value="<?=$allotment->mga_amount?>" id="mga_amount" name="mga_amount" placeholder="Enter MGA Amount"  />
                                     </div>
                                 </div>
 

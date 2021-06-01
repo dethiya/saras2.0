@@ -96,6 +96,7 @@
                 </a>
             </li>
             <?php endif;?>
+            <?php if($session_user->role=='stock manager' || $session_user->role=='administrator'):?>
             <li class="<?=$allotment_class?>">
                 <a href="allotment.php">
                     <i class="ion-ios-pricetags bg-gradient-purple"></i>
@@ -103,7 +104,7 @@
 
                 </a>
             </li>
-
+           
             <li class="has-sub <?=$branch_class?>">
                 <a href="javascript:;">
                     <b class="caret"></b>
@@ -117,6 +118,7 @@
 
                 </ul>
             </li>
+            <?php endif;?>
             <?php if($session_user->role=='customer care' || $session_user->role=='administrator' || $session_user->role=='stock manager'  ):?>
             <li class="has-sub <?=$delivery_menu_class?>">
                 <a href="javascript:;">
