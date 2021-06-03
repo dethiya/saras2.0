@@ -7,7 +7,7 @@
     include 'includes/top_nav.php';
     include 'includes/sidebar.php';
 
-        $allotment=Stock::select('*','allot_status_id<>5 and delr in ("20CC","37NB","68CA","P3CA")','allot_status_id ASC, model_code ASC, color ASC, invoice_dt DESC');
+        $allotment=Stock::select('*','allot_status_id<>5 and delr in ("20CC","37CB","68CA","P3CA")','allot_status_id ASC, model_code ASC, color ASC, invoice_dt DESC');
 
     ?>
     <div id="content" class="content">

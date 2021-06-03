@@ -393,7 +393,7 @@ if(isset($_POST['swap'])){
                                         <th>Exchange:</th>
                                         <td>
                                             <strong>Required:</strong> <?=empty($pre_vehicle->is_exchange)?'---':$pre_vehicle->is_exchange?> <br>
-                                            <strong>MSSF ID:</strong> 
+                                            <strong>Exchange Stage:</strong> 
                                             <?php 
                                                 $getExchStage=ExchangeStatus::find($pre_vehicle->exch_status);
                                                 echo $pre_vehicle->exch_status>0?$getExchStage->status_desc:'---';
@@ -517,7 +517,7 @@ if(isset($_POST['swap'])){
                                         <th>Exchange:</th>
                                         <td>
                                             <strong>Required:</strong> <?=empty($next_vehicle->is_exchange)?'---':$next_vehicle->is_exchange?> <br>
-                                            <strong>MSSF ID:</strong> 
+                                            <strong>Exchange Stage:</strong> 
                                             <?php 
                                                 $getExchStage=ExchangeStatus::find($next_vehicle->exch_status);
                                                 echo $next_vehicle->exch_status>0?$getExchStage->status_desc:'---';
