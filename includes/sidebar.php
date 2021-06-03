@@ -37,20 +37,14 @@
                     <span>Masters</span>
                 </a>
                 <ul class="sub-menu">
-                <?php if($session_user->role=='administrator'):?>
                     <li class="<?=$channel_class?>"><a href="channels.php">Channels</a></li>
                     <li class="<?=$outlet_class?>"><a href="outlets.php">Outlets</a></li>
-                <?php endif;?>
-                    <?php if($session_user->role=='stock manager'):?>            
                     <li class="<?=$model_class?>"><a href="models.php">Models</a></li>
                     <li class="<?=$variant_class?>"><a href="variants.php">Variants</a></li>
                     <li class="<?=$colors_class?>"><a href="colors.php">Colors</a></li>
                     <li class="<?=$srm_class?>"><a href="srms.php">SRM</a></li>
                     <li class="<?=$rm_class?>"><a href="rms.php">RM</a></li>
-                    <?php endif;?>
-                    <?php if($session_user->role=='pdi'):?>
                     <li class="<?=$stock_class?>"><a href="stock-locations.php">Stock Locations</a></li>
-                    <?php endif;?>
                 </ul>
             </li>
             <?php if($session_user->role=='administrator'):?>
@@ -71,8 +65,6 @@
                 <ul class="sub-menu">
                     
                     <li class="<?=$dispatch_class?>"><a href="dispatches.php">Dispatches</a></li>
-                   
-                   
                     <li class="<?=$dms_class?>"><a href="dms.php">DMS Invoices</a></li>
                     <li class="<?=$sms_class?>"><a href="sms.php">SMS Invoices</a></li>
                     

@@ -4,6 +4,7 @@
     $stock_class='active';
     include 'includes/header.php';
     if (!$session->is_signed_in()) {redirect("login.php");}
+    if($session_user->role!='administrator' && $session_user->role!='pdi'){redirect('index.php');}
     include 'includes/top_nav.php';
     include 'includes/sidebar.php';
 
