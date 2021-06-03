@@ -26,7 +26,6 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <?php if($session_user->role=='administrator'):?>
             <li class="nav-header">SETTINGS</li>
             <li class="has-sub <?=$menu_class?>">
                 <a href="javascript:;">
@@ -45,6 +44,7 @@
                     <li class="<?=$rm_class?>"><a href="rms.php">RM</a></li>
                 </ul>
             </li>
+            <?php if($session_user->role=='administrator'):?>
             <li class="<?=$contact_class?>">
                 <a href="users.php">
                     <i class="ion-ios-contact bg-gradient-yellow"></i>
@@ -63,9 +63,10 @@
                     <?php if($session_user->role=='administrator'):?>
                     <li class="<?=$dispatch_class?>"><a href="dispatches.php">Dispatches</a></li>
                     <?php endif;?>
+                    <?php if($session_user->role=='administrator' && $session_user->role=='stock manager' ):?>
                     <li class="<?=$dms_class?>"><a href="dms.php">DMS Invoices</a></li>
                     <li class="<?=$sms_class?>"><a href="sms.php">SMS Invoices</a></li>
-
+                    <?php endif;?>
                 </ul>
             </li>
 
