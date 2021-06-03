@@ -108,10 +108,10 @@ $get_allotment_status=AllotStatus::find($allotment->allot_status_id);
                                     <td width="1%" class="with-img">
                                         <?php $status=AllotStatus::find($value->allot_status_id); echo $status->status;?>
                                     </td>
-                                    <td><?=$value->allotment_dt?></td>
-                                    <td><?=$value->customer_name?></td>
-                                    <td><?php $srm_name=Srm::find($value->srm_id); echo $srm_name->srm_name;?></td>
-                                    <td><?php $rm_name=Rm::find($value->rm_id); echo $rm_name->rm_name;?></td>
+                                    <td><?=$value->allot_status_id==4?'---':$value->allotment_dt?></td>
+                                    <td><?=$value->allot_status_id==4?'---':$value->customer_name?></td>
+                                    <td><?php $srm_name=Srm::find($value->srm_id); echo $value->srm_id>0?$srm_name->srm_name:'---';?></td>
+                                    <td><?php $rm_name=Rm::find($value->rm_id); echo $value->rm_id>0?$rm_name->rm_name:'---';?></td>
                                     <td><?=$value->remarks?></td>
                                     <td><?php $user_name=User::find($value->updated_by); echo $user_name->employee_name;?></td>
                                     <td><?=$value->updated_at?></td>
@@ -150,6 +150,7 @@ $get_allotment_status=AllotStatus::find($allotment->allot_status_id);
                             <th class="text-nowrap">Finance Type</th>
                             <th class="text-nowrap">Financer</th>
                             <th class="text-nowrap">Finance Stage</th>
+                            <th class="text-nowrap">Remarks</th>
                             <th class="text-nowrap">Updated By</th>
                             <th class="text-nowrap">Updated At</th>
                         </tr>
@@ -163,14 +164,14 @@ $get_allotment_status=AllotStatus::find($allotment->allot_status_id);
 
                             <tr class="odd gradeX">
                                 <td width="1%" class="f-w-600 text-inverse"><?=$key+1?></td>
-                                <td><?=$value->allotment_dt?></td>
-                                <td><?=$value->customer_name?></td>
-                                <td><?=$value->fin_is_fin_req?></td>
+                                <td><?=empty($value->customer_name)?'---':$value->allotment_dt?></td>
+                                <td><?=empty($value->customer_name)?'---':$value->customer_name?></td>
+                                <td><?=empty($value->customer_name)?'---':$value->fin_is_fin_req?></td>
                                 <td><?php
                                     if($value->fin_is_fin_req=='No'){
                                         echo 'Nil';
                                     }else{
-                                        echo $value->fin_fin_type;
+                                        echo empty($value->customer_name)?'---':$value->fin_fin_type;
                                     }
 
                                     ?></td>
@@ -180,7 +181,7 @@ $get_allotment_status=AllotStatus::find($allotment->allot_status_id);
                                     if($value->fin_is_fin_req=='No'){
                                         echo '-';
                                     }else{
-                                        echo $banks->bank_name;
+                                        echo empty($value->fin_bank_id>0)?'---':$banks->bank_name;
                                     }
 
                                     ?>
@@ -190,10 +191,11 @@ $get_allotment_status=AllotStatus::find($allotment->allot_status_id);
                                     if($value->fin_is_fin_req=='No'){
                                         echo '-';
                                     }else{
-                                        echo $stages->stage_name;
+                                        echo empty($value->fin_stage>0)?'---':$stages->stage_name;
                                     }
                                     ?>
                                 </td>
+                                <td><?=$value->remark_one?></td>
 
                                 <td><?php $user_name=User::find($value->updated_by); echo $user_name->employee_name;?></td>
                                 <td><?=date('d-m-Y h:i:s A',strtotime($value->updated_at))?></td>
@@ -245,10 +247,10 @@ $get_allotment_status=AllotStatus::find($allotment->allot_status_id);
 
                             <tr class="odd gradeX">
                                 <td width="1%" class="f-w-600 text-inverse"><?=$key+1?></td>
-                                <td><?=$value->allotment_dt?></td>
-                                <td><?=$value->customer_name?></td>
-                                <td><?=$value->is_exchange?></td>
-                                <td><?php $ex_status=ExchangeStatus::find($value->exch_status); echo $ex_status->status_desc;?></td>
+                                <td><?=empty($value->customer_name)?'---':$value->allotment_dt?></td>
+                                <td><?=empty($value->customer_name)?'---':$value->customer_name?></td>
+                                <td><?=empty($value->customer_name)?'---':$value->is_exchange?></td>
+                                <td><?php $ex_status=ExchangeStatus::find($value->exch_status); echo empty($value->exch_status>0)?'---':$ex_status->status_desc;?></td>
                                 <td><?=$value->exch_remark?></td>
                                 <td><?php $user_name=User::find($value->updated_by); echo $user_name->employee_name;?></td>
                                 <td><?=$value->updated_at?></td>

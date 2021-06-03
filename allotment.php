@@ -19,8 +19,9 @@
         $update_type=Stock::find($_GET['id']);
         $update_type->type=$type;
         $update_type->save();
-        redirect('allotment.php');
-        $session->message='Vehicle type updated successfully.';
+        echo '<script>alert("Vehicle type modified successfully.");</script>';
+        // redirect('allotment.php');
+        // $session->message='Vehicle type updated successfully.';
     }
 
 
@@ -75,7 +76,7 @@
                                 <th class="text-nowrap">Engine #</th>
                                 <th class="text-nowrap">Dispatch Date</th>
                                 <th class="text-nowrap">Vintage</th>
-                                <th class="text-nowrap">Year</th>
+                                <th class="text-nowrap">Type</th>
                                 <th class="text-nowrap">Location</th>
                                 <th class="text-nowrap">Vehicle Condition</th>
 

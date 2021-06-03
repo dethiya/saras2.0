@@ -49,7 +49,7 @@ if (isset($_POST['submit']))
     $history->customer_name     = $allotment->customer_name;
     $history->fin_is_fin_req    = $allotment->fin_is_fin_req;
     $history->mssf_id           = $allotment->mssf_id;
-    $history->mss_login_id      = $allotment->mss_login_id;
+    $history->mssf_login_dt      = $allotment->mssf_login_dt;
     $history->fin_fin_type      = $allotment->fin_fin_type;
     $history->fin_bank_id       = $allotment->fin_bank_id;
     $history->branch            = $allotment->branch;

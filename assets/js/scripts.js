@@ -32,6 +32,8 @@ $(document).ready(function(){
     });
 
 
+    
+
 
 
 
@@ -160,3 +162,18 @@ $(document).ready(function(){
     });
 });
 
+
+// swap vehicle fetch vintage of chassis one 
+    $(document).on('change','#chassis_prev', function(){
+        $('.vintage-target').html( $('option:selected', this).data('vintage') );
+    })
+// swap vehicle fetch vintage of chassis two 
+$(document).on('change','#chassis_next', function(){
+    $('.vintage-target2').html( $('option:selected', this).data('vintage') );
+})
+
+
+$(document).ready(function() {
+    $('#chassis_prev').select2();
+    $('#chassis_next').select2();
+});

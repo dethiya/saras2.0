@@ -39,7 +39,7 @@ if (isset($_POST['submit']))
     $history->customer_name= $allotment->customer_name;
     $history->srm_id=$allotment->srm_id;
     $history->rm_id=$allotment->rm_id;
-    $history->allotment_remark=$allotment->allotment_remark;
+    $history->remarks=$allotment->allotment_remark;
     $history->updated_by=$session->user_id;
 
 

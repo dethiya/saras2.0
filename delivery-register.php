@@ -57,7 +57,7 @@ $delivery_menu_class='active';
                                 <th class="text-nowrap">Color</th>
                                 <th class="text-nowrap">Chassis #</th>
                                 <th class="text-nowrap">Engine #</th>
-                                <th class="text-nowrap">Location</th>
+                                <th class="text-nowrap">Status</th>
                                 <th class="text-nowrap">Customer Name</th>
                                 <th class="text-nowrap">SRM</th>
                                 <th class="text-nowrap">RM</th>
@@ -68,6 +68,7 @@ $delivery_menu_class='active';
                                 <th class="text-nowrap">Customer Mobile #</th>
                                 <th class="text-nowrap">Customer Email Id</th>
                                 <th class="text-nowrap">Address</th>
+                                <th class="text-nowrap">Customer Date of Birth</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -102,7 +103,7 @@ $delivery_menu_class='active';
                                         </div>
                                     </td>
                                     <td><?=!$get_customer_details?'-':$get_customer_details->gatepass?></td>
-                                    <td><?=date('d-m-Y',strtotime($value->delivery_date))?></td>
+                                    <td><?=date('d-M-y',strtotime($value->delivery_date))?></td>
                                     <td><?=$value->delr?></td>
                                     <td><?php $get_variant=Variant::find_variant($value->model_code); echo $get_variant->variant_name;?></td>
                                     <td><?php $get_color=Color::find_color($value->color); echo $get_color->color_name;?></td>
@@ -115,9 +116,9 @@ $delivery_menu_class='active';
                                     <td><?php echo $value->rm_id>0 ? $get_rm->rm_name : '-'; ?>
                                     </td>
                                     <td><?php echo empty($value->sms_inv_no)?'-':$value->sms_inv_no;?></td>
-                                    <td><?php echo empty($value->sms_inv_no) ? '-' : date('d-m-Y',strtotime($value->sms_inv_dt)); ?></td>
+                                    <td><?php echo empty($value->sms_inv_no) ? '-' : date('d-M-y',strtotime($value->sms_inv_dt)); ?></td>
                                     <td><?php echo empty($value->dms_inv_no)?'-':$value->dms_inv_no;?></td>
-                                    <td><?php echo empty($value->dms_inv_no) ? '-' : date('d-m-Y',strtotime($value->dms_inv_dt)); ?></td>
+                                    <td><?php echo empty($value->dms_inv_no) ? '-' : date('d-M-y',strtotime($value->dms_inv_dt)); ?></td>
                                     <td>
                                     <?php echo !$get_customer_details?'-':$get_customer_details->mobile_no; ?>
                                     </td>
@@ -131,6 +132,9 @@ $delivery_menu_class='active';
                                     </td>
                                     <td>
                                     <?php echo !$get_customer_details?'-':$get_customer_details->address; ?>
+                                    </td>
+                                    <td>
+                                    <?php echo !$get_customer_details?'-':date('d-M-y',strtotime($get_customer_details->date_of_birth)); ?>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>

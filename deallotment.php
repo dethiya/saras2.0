@@ -43,6 +43,12 @@ if($allotment) {
     $allotment->is_exchange='';
     $allotment->exch_status=0;
     $allotment->exch_date=NULL;
+    $allotment->mssf_id           ='';
+    $allotment->mssf_login_dt     =NULL;
+    $allotment->branch            ='';
+    $allotment->bank_executive    ='';
+    $allotment->remark_one        ='';
+    $allotment->customer_mobile_no='';
     $allotment->save();
 
     $session->message("The Vehicle with chassis no. {$allotment->chassis_no} & engine no. {$allotment->engine_no} has been dealloted successfully!");

@@ -22,6 +22,7 @@
         <script src="assets/plugins/jszip/dist/jszip.min.js"></script>
         <script src="assets/js/demo/table-manage-combine.demo.js"></script>
         <script src="assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="assets/plugins/select2/dist/js/select2.min.js"></script>
         <script src="assets/js/jquery.tableTotal.js"></script>
         <script src="assets/js/scripts.js"></script>
         <script src="assets/js/allotment.js"></script>
