@@ -177,3 +177,4 @@ $(document).ready(function() {
     $('#chassis_prev').select2();
     $('#chassis_next').select2();
 });
+

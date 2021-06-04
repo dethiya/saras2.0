@@ -6,11 +6,6 @@
     include 'includes/top_nav.php';
     include 'includes/sidebar.php';
 
-    if ($session_user->role=='administrator'){
-        $pdi=Stock::select('*','stock_location=1 OR stock_location=10','invoice_dt ASC');
-    }else{
-        $pdi=Stock::select('*','delr="'.$session_user->outlet_id.'" AND stock_location=1 OR stock_location=10','invoice_dt ASC');;
-    }
 
 
 
@@ -29,7 +24,7 @@
                 <a href="#" class="alert-link"></a>
             </div>
         <?php endif; ?>
-
+            
         <h1 class="page-header"><?=$page_title?></h1>
         <div class="row">
             <div class="col-xl-12">
@@ -44,12 +39,15 @@
                             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                         </div>
                     </div>
-
-                    <div class="panel-body">
+                    <form action="" method="POST">
+                    <div  class="panel-body">
                         <table id="data-table-combine" class="table table-striped table-bordered table-td-valign-middle">
                             <thead>
                             <tr>
                                 <th width="1%">SN</th>
+                                <th>
+                                    <input id="selectAllBoxes" type="checkbox">
+                                </th>
                                 <th width="1%">Delr Code</th>
                                 <th class="text-nowrap">Dispatch Date</th>
                                 <th class="text-nowrap">Transport Reg #</th>
@@ -64,13 +62,29 @@
                             </thead>
                             <tbody>
                                 <?php
-
+                                    if ($session_user->role=='administrator') {
+                                        $pdi=Stock::select('*','stock_location in (1,10)','invoice_dt, transport_reg_number asc');    
+                                    } else {
+                                        if ($session_user->outlet_id=="6801") {
+                                            $pdi=Stock::select('*','delr in ("6801","68NA","68CA") and stock_location in (1,10)','invoice_dt, transport_reg_number asc');
+                                           } elseif($session_user->outlet_id=="2002") {
+                                            $pdi=Stock::select('*','delr in ("2002","20NB","20CC") and stock_location in (1,10)','invoice_dt, transport_reg_number asc');
+                                           } elseif($session_user->outlet_id=="3701") {
+                                            $pdi=Stock::select('*','delr in ("3701","37NA","37CB") and stock_location in (1,10)','invoice_dt, transport_reg_number asc');
+                                           }else {
+                                            $pdi=Stock::select('*','delr in ("P301","P3NA","P3CA") and stock_location in (1,10)','invoice_dt, transport_reg_number asc');
+                                           } 
+                                    }
+                                    
+                                   
+                                   
                                     foreach ($pdi as $key=>$value):
                                 ?>
                                 <tr>
                                     <td><?=$key+1?></td>
+                                    <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $value->id; ?>'></td>
                                     <td><?=$value->delr?></td>
-                                    <td><?=date('d-m-Y',strtotime($value->invoice_dt))?></td>
+                                    <td data-order=<?=$value->invoice_dt?>><?=date('d-m-Y',strtotime($value->invoice_dt))?></td>
                                     <td><?=$value->transport_reg_number?></td>
                                     <td>
                                         <?php
@@ -95,6 +109,7 @@
                             </tbody>
                         </table>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

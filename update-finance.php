@@ -221,7 +221,7 @@ if (isset($_POST['submit']))
                                         <select name="fin_bank_id" id="fin_bank_id" class="form-control" <?=$disabled?> >
                                             <option value="">-Select Bank-</option>
                                             <?php
-                                            $banks=Bank::all();
+                                            $banks=Bank::select('*','','bank_name asc');
                                             foreach ($banks as $list) {
                                                 if ($allotment->fin_bank_id==$list->id){
                                                     echo "<option selected value='".$list->id."'>";
