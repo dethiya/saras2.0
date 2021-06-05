@@ -36,3 +36,4 @@ require_once (INCLUDES_PATH.DS.'AllotHistory.php');
 require_once (INCLUDES_PATH.DS.'FinanceHistory.php');
 require_once (INCLUDES_PATH.DS.'ExchangeHistory.php');
 require_once (INCLUDES_PATH.DS.'Indent.php');
+require_once (INCLUDES_PATH.DS.'Driver.php');
