@@ -5,18 +5,19 @@ class Driver extends DB_object
     protected static $db_table="drivers";
     protected static $db_table_fields=array('driver_name','address','dl_no','vehicle_class','dl_issue_dt','dl_validity','dob','user_image','dl_scanned_copy','status');
     public $id;
-    public $driver_name;
-    public $address;
-    public $dl_no;
-    public $vehicle_class;
-    public $dl_issue_dt;
-    public $dl_validity;
-    public $dob;
-    public $user_image;
+    public $driver_name; //ok
+    public $address; //ok
+    public $dl_no; //ok
+    public $vehicle_class; //ok
+    public $dl_issue_dt; //ok
+    public $dl_validity; //ok
+    public $dob; //ok
+    public $user_image; // ok
     public $dl_scanned_copy;
     public $status;
     public $upload_directory="images";
     public $image_placeholder="images".DS."img_avatar.png";
+    public $dl_placeholder="images".DS."dl_avatar.png";
     
 
     public function image_path_and_placeholder(){
@@ -24,20 +25,10 @@ class Driver extends DB_object
     }
 
     public function dl_path_and_placeholder(){
-        return empty($this->dl_scanned_copy) ? $this->image_placeholder : $this->upload_directory.DS.$this->user_image;
+        return empty($this->dl_scanned_copy) ? $this->dl_placeholder : $this->upload_directory.DS.$this->dl_scanned_copy;
     }
 
-    public static function verify_user($username,$password)
-    {
-        global $database;
-        $username=$database->escape_string($username);
-        $password=$database->escape_string($password);
-
-        $sql="SELECT * FROM ".self::$db_table." WHERE username='$username' AND password='$password' LIMIT 1";
-        $the_result_array= self::find_this_query($sql);
-        return !empty($the_result_array) ? array_shift($the_result_array) : false;
-        
-    }
+   
 
 
      public function delete_photo()
@@ -88,6 +79,34 @@ class Driver extends DB_object
             }
 
     }
-   
+
+    // upload dl
+    public function upload_dl() 
+    {
+        if(!empty($this->errors))
+        {
+            return false;
+        }
+        if(empty($this->dl_scanned_copy) || empty($this->tmp_path))
+        {
+            $this->errors[] = "the file was not available";
+            return false;
+        }
+        $target_path = SITE_ROOT . DS . $this->upload_directory . DS . $this->dl_scanned_copy;
+        if(file_exists($target_path)) {
+            $this->errors[] = "The file {$this->dl_scanned_copy} already exists";
+            return false;
+        }
+        if(move_uploaded_file($this->tmp_path, $target_path)) {
+            unset($this->tmp_path);
+            return true;
+        } else {
+            $this->errors[] = "The file directory does not have permission.";
+            return false;
+        }
+    }
 }
+
+
+
 //end of user class
