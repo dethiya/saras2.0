@@ -45,9 +45,6 @@
                             <thead>
                             <tr>
                                 <th width="1%">SN</th>
-                                <th>
-                                    <input id="selectAllBoxes" type="checkbox">
-                                </th>
                                 <th width="1%">Delr Code</th>
                                 <th class="text-nowrap">Dispatch Date</th>
                                 <th class="text-nowrap">Transport Reg #</th>
@@ -82,7 +79,6 @@
                                 ?>
                                 <tr>
                                     <td><?=$key+1?></td>
-                                    <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $value->id; ?>'></td>
                                     <td><?=$value->delr?></td>
                                     <td data-order=<?=$value->invoice_dt?>><?=date('d-m-Y',strtotime($value->invoice_dt))?></td>
                                     <td><?=$value->transport_reg_number?></td>
