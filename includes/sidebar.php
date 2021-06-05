@@ -44,6 +44,7 @@
                     <li class="<?=$colors_class?>"><a href="colors.php">Colors</a></li>
                     <li class="<?=$srm_class?>"><a href="srms.php">SRM</a></li>
                     <li class="<?=$rm_class?>"><a href="rms.php">RM</a></li>
+                    <li class="<?=$drivers_class?>"><a href="drivers.php">Drivers</a></li>
                     <li class="<?=$stock_class?>"><a href="stock-locations.php">Stock Locations</a></li>
                 </ul>
             </li>
