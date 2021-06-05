@@ -22,7 +22,7 @@ if (isset($_GET['type']) && $_GET['type']!=''){
 }
 
 
-        $allotment=Indent::select('*','existing_outlet_code="'.$session_user->outlet_id.'"');
+        $allotment=Indent::select('*','existing_outlet_code="'.$session_user->outlet_id.'"','id desc');
     ?>
     <div id="content" class="content">
         <ol class="breadcrumb float-xl-right">
