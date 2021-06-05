@@ -218,6 +218,35 @@ class Db_object
         }
 
 }
+
+public function set_dl($file) { 
+
+    if(empty($file) || !$file || !is_array($file)) {
+    $this->errors[] = "There was no file uploaded here";
+    return false;
+
+    }elseif($file['error'] !=0) {
+
+    $this->errors[] = $this->upload_errors_array[$file['error']];
+    return false;
+
+    } else {
+
+
+    $this->dl_scanned_copy =  basename($file['name']);
+    $this->tmp_path = $file['tmp_name'];
+    $this->type     = $file['type'];
+    $this->size     = $file['size'];
+    }
+
+}
+
+
+
+
+
+
+
         public static function count_all()
         {
             global $database;
