@@ -13,16 +13,6 @@
         $allotment=Stock::select('*','delr="'.$session_user->outlet_id.'" AND allot_status_id<>5','allot_status_id ASC, model_code ASC, color ASC, invoice_dt DESC');
     }
 
-    if (isset($_GET['type']) && $_GET['type']!=''){
-        $type=$_GET['type'];
-        $id=$_GET['id'];
-        $update_type=Stock::find($_GET['id']);
-        $update_type->type=$type;
-        $update_type->save();
-        echo '<script>alert("Vehicle type modified successfully.");</script>';
-        // redirect('allotment.php');
-        // $session->message='Vehicle type updated successfully.';
-    }
 
 
     ?>
@@ -145,10 +135,11 @@
                                         ?>
                                     </td>
                                     <td>
-                                    <?php if ($value->type==1): ?>
-                                        <a href="?type=0&id=<?=$value->id?>">Type II</a>
+                                    <?php if ($value->type!=0): ?>
+                                        
+                                        <span class="text-primary btnActivate" vehicle_id="<?=$value->id?>" vehicle_status="0">Type II</span>
                                     <?php else:?>
-                                        <a href="?type=1&id=<?=$value->id?>">Type I</a>
+                                        <span class="text-danger btnActivate" vehicle_id="<?=$value->id?>" vehicle_status="1">Type I</span>
                                     <?php endif;?>
                                     </td>
                                     <td><a href="update-location.php?id=<?=$value->id?>"><?php $get_stock_location=StockLocation::find($value->stock_location); echo $get_stock_location->stock_loc_name; ?></a></td>

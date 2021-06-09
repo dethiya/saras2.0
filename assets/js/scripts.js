@@ -178,3 +178,41 @@ $(document).ready(function() {
     $('#chassis_next').select2();
 });
 
+// Toggle Vehicle Types
+$(document).ready(function(){
+    $(document).on('click','.btnActivate',function(){
+        var vehicle_id=$(this).attr("vehicle_id");
+        var vehicle_status=$(this).attr("vehicle_status");
+        // console.log(vehicle_id+','+vehicle_status);
+        var data = new FormData();
+        data.append("vehicle_id",vehicle_id);
+        data.append("vehicle_status",vehicle_status);
+        $.ajax({
+            url:'ajax/vehicles.ajax.php',
+            method:'POST',
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(answer){
+                toastr.success("Vehicle type updated successfully.","Success");
+                toastr.options = {
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                  }
+            }
+        })
+        if(vehicle_status == 0){
+            $(this).removeClass('text-primary');
+            $(this).addClass('text-danger');
+            $(this).html('Type I');
+            $(this).attr('vehicle_status',1);
+        }else{
+            $(this).addClass('text-primary');
+            $(this).removeClass('text-danger');
+            $(this).html('Type II');
+            $(this).attr('vehicle_status',0);
+        }
+    })
+})
