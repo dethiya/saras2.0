@@ -22,7 +22,7 @@ if (isset($_GET['type']) && $_GET['type']!=''){
 }
 
 
-$allotment=Indent::select('*','request_outlet_id="'.$session_user->outlet_id.'"');
+$allotment=Indent::select('*','request_outlet_id="'.$session_user->outlet_id.'"','id desc');
 ?>
 <div id="content" class="content">
     <ol class="breadcrumb float-xl-right">
@@ -99,7 +99,7 @@ $allotment=Indent::select('*','request_outlet_id="'.$session_user->outlet_id.'"'
                                     ?>
 
                                     </td>
-                                <td><?=date('d-m-Y h:i:s A',strtotime($value->datetime))?></td>
+                                <td data-order="<?=$value->datetime?>"><?=date('d-m-Y h:i:s A',strtotime($value->datetime))?></td>
                                 <td>
                                     <?php
                                     $get_variant=Variant::find_variant($get_vehicle_details->model_code);
