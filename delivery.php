@@ -32,7 +32,7 @@ if($allotment) {
     $allotment->save();
 
 
-    $session->message("The Vehicle bearing chassis no. {$allotment->chassis_prefix}{$allotment->chassis_no} delivered successfully!");
+    // $session->message("The Vehicle bearing chassis no. {$allotment->chassis_prefix}{$allotment->chassis_no} delivered successfully!");
     redirect("deliveries.php");
 } else {
     redirect("deliveries.php");
