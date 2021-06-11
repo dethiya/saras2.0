@@ -3,10 +3,11 @@
 include("includes/header.php");
 if (!$session->is_signed_in()) {redirect("login.php");}
 
-if(empty($_GET['id'])) {
-    redirect("allotment.php");
-}
-$get_vehicle_id=$_GET['id'];
+
+$get_vehicle_id=$_POST['vehicle_id'];
+
+echo $get_vehicle_id;
+
 $allotment = Stock::find($get_vehicle_id);
 $history=new AllotHistory();
 if($allotment) {
@@ -51,8 +52,8 @@ if($allotment) {
     $allotment->customer_mobile_no='';
     $allotment->save();
 
-    $session->message("The Vehicle with chassis no. {$allotment->chassis_no} & engine no. {$allotment->engine_no} has been dealloted successfully!");
-    redirect("allotment.php");
+    // $session->message("The Vehicle with chassis no. {$allotment->chassis_no} & engine no. {$allotment->engine_no} has been dealloted successfully!");
+    // redirect("allotment.php");
 } else {
     redirect("allotment.php");
 }

@@ -21,16 +21,6 @@
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item active"><?=$page_title?></li>
         </ol>
-
-        <?php if ($session->message): ?>
-            <div class="alert alert-success fade show">
-                <span class="close" data-dismiss="alert">×</span>
-                <strong>Success!</strong>
-                <?=$session->message?>
-                <a href="#" class="alert-link"></a>
-            </div>
-        <?php endif; ?>
-
         <h1 class="page-header"><?=$page_title?></h1>
 
         <div class="row">

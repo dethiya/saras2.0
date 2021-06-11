@@ -39,10 +39,43 @@ $(document).ready(function(){
     $('#data-table-combine tbody').on('click', '.btnDeallotment', function () {
         var vehicle_id=$(this).attr("vehicle_id");
         var chassis_no=$(this).attr("chassis_no");
-        if(confirm("Are you sure, you want to deallot this vehicle (Chassis #:"+chassis_no+")?")){
-            window.location.href='deallotment.php?id='+vehicle_id;
-            return true;
-        }
+        // console.log(vehicle_id);
+        swal({
+            title: "Deallot Chassis#: "+chassis_no,
+            text: "Are you sure, you want to deallot this vehicle?",
+            icon: "info",
+            buttons: {
+                cancel: "Discard!",
+                confirm: {
+                  text: "Confirm!",
+                  value: "confirm",
+                },
+                
+              },
+            dangerMode: true,
+          }).then((value)=>{
+
+            switch (value) {
+                
+                case "confirm":
+                    $.ajax({
+                        url:'deallotment.php',
+                        method:'post',
+                        data:{vehicle_id:vehicle_id},
+                        success:function(result){
+                            toastr.success("Vehicle with Chassis #: "+chassis_no+" deallotted successfully.", "Success");         
+                            window.location.href="allotment.php";
+                        }
+                    })
+                // window.location.href='deallotment.php?id='+vehicle_id;
+                // toastr.success("Vehicle with Chassis #: "+chassis_no+" deallotted successfully.", "Success");
+                break;
+             
+                default:
+                    toastr.info("Vehicle deallotment aborted.", "Info");
+              }
+          })
+          
     } );
 });
 
